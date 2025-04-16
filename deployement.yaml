@@ -24,12 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx-nodeport-service
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: nginx
   ports:
-    - protocol: TCP
-      port: 80       # Port exposed by the service
-      targetPort: 80 # Port on the pod
+    - port: 80         # Service port
+      targetPort: 80   # Container port
+      nodePort: 30080  # Exposed node port (must be in range 30000-32767)
